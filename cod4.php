@@ -1,5 +1,5 @@
 <?php
-$servers['quakeserver'] = array('quake3', '209.58.164.129', '28960');
+$servers['quakeserver'] = array('quake3', 'Server_ip_here', '28960');
 
 
 require_once 'gameq/GameQ.php';

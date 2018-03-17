@@ -3,8 +3,9 @@
 require_once("libraries/TeamSpeak3/TeamSpeak3.php");
 require_once("cod4.php");
 require_once("config.php");
+require_once("db.php");
 
-$ts3_server = TeamSpeak3::factory("serverquery://".$serverquery.":".$server_password."@".$server_host.":"."10011/?server_port=".$server_port."&nickname=".$nickname);
+$ts3_server = TeamSpeak3::factory("serverquery://".$server_query.":".$server_password."@".$server_host.":"."10011/?server_port=".$server_port."&nickname=".$server_nickname);
 
 $count = $ts3_server->getProperty("virtualserver_clientsonline");
 $max = $ts3_server->getProperty("virtualserver_maxclients");
@@ -36,19 +37,19 @@ if (array_key_exists('players', $data['quakeserver'])){
 	// COD4 Channel Description Change
 	$des="
 	[center][size=13][b][I]Server Status[/b][/center]
+	[center][IMG]https://image.gametracker.com/images/maps/160x120/cod4/".$mapname.".jpg[/IMG][/center]
 
 	[COLOR=#0055ff]MAP Name[/COLOR]     :".$mapname." 
 	[COLOR=#0055ff]up-time[/COLOR]          :".$uptime." 
 	[COLOR=#0055ff]Map star-time[/COLOR]:".$mapstart." 
 
-	 [b]Online Players Now:[/b] 
-
-	[left]       IGN [/left]                marks       ping
-	";
+	 [b]Online Players Now:[/b]";
 
 	$bestscore= array($var[0]['nick'],$var[0]['frags']);
 	for ($i=0; $i < sizeof($var); $i++){
-		$player="[left]".($i+1).". [COLOR=#ff0000]".$var[$i]['nick']."[/color]"."      [COLOR=#0055ff]".$var[$i]['frags'] . "[/color]        "."".$var[$i]['ping']."[/left]";
+		$p_name=$var[$i]['nick'];
+		add_count($p_name);
+		$player="[left]".($i+1).". [COLOR=#ff0000]".$var[$i]['nick']."[/color][/left]";
 		$des=$des.$player;
 		if ($var[$i]['frags']>$bestscore[1]){
 			$bestscore[0]=$var[$i]['nick'];

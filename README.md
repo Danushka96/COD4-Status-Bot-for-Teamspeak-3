@@ -11,3 +11,7 @@ Call Of Duty 04 Server Query Script For Teamspeak 3 Server. This Bot can keep tr
 #Install
 
 Change the config.php with your own informations and add rcon job for each script day / week / month as you want.  
+
+#This is compatible with latest TS3 version as this app use the ts3 API
+
+#Enjoy the bot
